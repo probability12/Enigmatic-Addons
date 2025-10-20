@@ -50,19 +50,14 @@ public class TotemOfMalice extends ItemBaseCurio implements ICursed {
     }
 
     public static ItemStack getValidTotem(Player player) {
-//        for (NonNullList<ItemStack> stacks : player.getInventory().compartments) {
-//            for (ItemStack itemstack : stacks) {
-//                if (!itemstack.isEmpty() && itemstack.is(EnigmaticAddonItems.TOTEM_OF_MALICE) && isPowerful(itemstack)) {
-//                    return itemstack;
-//                }
-//            }
-//        }
-        for (ItemStack stack : player.getHandSlots()) {
-            if (!stack.isEmpty() && stack.is(EnigmaticAddonItems.TOTEM_OF_MALICE) && isPowerful(stack))
-                return stack;
+        for (NonNullList<ItemStack> stacks : player.getInventory().compartments) {
+            for (ItemStack itemstack : stacks) {
+                if (!itemstack.isEmpty() && itemstack.is(EnigmaticAddonItems.TOTEM_OF_MALICE) && isPowerful(itemstack)) {
+                    return itemstack;
+                }
+            }
         }
-        return ItemStack.EMPTY;
-    }
+	}
 
     public static boolean isEnable(Player player, Boolean needUnbroken) {
         if (!SuperpositionHandler.isTheCursedOne(player)) return false;
