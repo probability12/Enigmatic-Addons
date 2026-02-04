@@ -361,7 +361,7 @@ public class AnnihilatingSword extends SwordItem implements IEldritch {
             ItemStack mainHandItem = entity.getMainHandItem();
             int energy = mainHandItem.getOrCreateTag().getInt("AnniEnergy");
             if (energy > 0) event.setAmount(event.getAmount() * (1 + energy * energyMultiplier.getValue().asModifier()));
-            if (EnigmaticAddons.Acceptors.contains(entity.getUUID())) {
+            if (SuperpositionHandler.isTheWorthyOne(player)) {
                 CuriosApi.getCuriosInventory(entity).ifPresent((handler) -> {
                     IItemHandlerModifiable curios = handler.getEquippedCurios();
                     for (int i = 0; i < handler.getSlots() - 1; ++i) {
@@ -374,7 +374,7 @@ public class AnnihilatingSword extends SwordItem implements IEldritch {
         if (victim.getUseItem().is(this) && victim.getUsedItemHand() == InteractionHand.MAIN_HAND) {
             event.setAmount(event.getAmount() * (1 - chargingDamageResistance.getValue().asModifier()));
         }
-        if (EnigmaticAddons.Acceptors.contains(victim.getUUID())) {
+        if (SuperpositionHandler.isTheWorthyOne(victim)) {
             CuriosApi.getCuriosInventory(victim).ifPresent((handler) -> {
                 IItemHandlerModifiable curios = handler.getEquippedCurios();
                 for (int i = 0; i < handler.getSlots() - 1; ++i) {
@@ -470,7 +470,7 @@ public class AnnihilatingSword extends SwordItem implements IEldritch {
                     }
                 }
                 int i = 20 + Mth.floor(Math.pow(size, 0.875F) * 0.8974862513F);
-                i = player != null && EnigmaticAddons.Acceptors.contains(player.getUUID()) ? i * 4 / 5 : i;
+                i = player != null && SuperpositionHandler.isTheWorthyOne(player) ? i * 2 / 5 : i;
                 stack.getOrCreateTag().putInt("AnniCacheDemand", i);
                 return i;
             }
