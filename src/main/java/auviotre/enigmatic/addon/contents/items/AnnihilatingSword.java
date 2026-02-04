@@ -361,7 +361,7 @@ public class AnnihilatingSword extends SwordItem implements IEldritch {
             ItemStack mainHandItem = entity.getMainHandItem();
             int energy = mainHandItem.getOrCreateTag().getInt("AnniEnergy");
             if (energy > 0) event.setAmount(event.getAmount() * (1 + energy * energyMultiplier.getValue().asModifier()));
-            if (SuperpositionHandler.isTheWorthyOne(player)) {
+            if (entity instanceof Player player && SuperpositionHandler.isTheWorthyOne(player)) {
                 CuriosApi.getCuriosInventory(entity).ifPresent((handler) -> {
                     IItemHandlerModifiable curios = handler.getEquippedCurios();
                     for (int i = 0; i < handler.getSlots() - 1; ++i) {
@@ -374,7 +374,7 @@ public class AnnihilatingSword extends SwordItem implements IEldritch {
         if (victim.getUseItem().is(this) && victim.getUsedItemHand() == InteractionHand.MAIN_HAND) {
             event.setAmount(event.getAmount() * (1 - chargingDamageResistance.getValue().asModifier()));
         }
-        if (SuperpositionHandler.isTheWorthyOne(victim)) {
+        if (victim instanceof Player player && SuperpositionHandler.isTheWorthyOne(player)) {
             CuriosApi.getCuriosInventory(victim).ifPresent((handler) -> {
                 IItemHandlerModifiable curios = handler.getEquippedCurios();
                 for (int i = 0; i < handler.getSlots() - 1; ++i) {
